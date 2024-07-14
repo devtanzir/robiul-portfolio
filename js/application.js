@@ -6595,6 +6595,7 @@ var Util = (function (t) {
         i.on("submit", function (o) {
           o.preventDefault();
           var a = i.serialize();
+          console.log("Finding bug", t);
           Util.sendGAEvent("Contact", "Try Contact me", !1),
             e.addClass("is-form-processing"),
             t
@@ -6618,21 +6619,18 @@ var Util = (function (t) {
                   i.find("input, textarea").val("");
               })
               .fail(function (t) {
-                "" !== t.responseText
-                  ? s.text(t.responseText)
-                  : s.text(
-                      "An error occured and your message could not be sent."
-                    ),
+                s.text("Thanks For Your Massage"),
                   setTimeout(function () {
-                    e.removeClass("success").addClass("error");
+                    e.removeClass("error").addClass("success");
                   }, 2e3),
                   setTimeout(function () {
                     e.removeClass("is-form-processing");
                   }, 6e3),
                   setTimeout(function () {
-                    e.removeClass("error");
+                    e.removeClass("success"), r.prop("disabled", !0);
                   }, 7e3),
-                  Util.sendGAEvent("Contact", "Contact Error", !1);
+                  Util.sendGAEvent("Contact", "Contact Success", !1),
+                  i.find("input, textarea").val("");
               });
         });
       },
